@@ -33,7 +33,7 @@ export const Projects = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <a
-                    href="#home"
+                    href="https://github.com/bronannodev/bronannodev-portfolio"
                     className="text-blue-400 hover:text-blue-300 transition-colors my-4"
                   >
                     Link repositorio →
