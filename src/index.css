@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Space Grotesk", sans-serif;
+    background: #0a0a0a;
+    color: #f3f4f6;
+}
+
+.moving-border {
+    position: relative;
+}
+
+.moving-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #3b82f6, #a855f7, #3b82f6);
+    z-index: -1;
+    animation: movingBorder 4s linear infinite;
+    border-radius: 10px;
+    opacity: 0.7;
+}
+
+.moving-border:hover::before {
+    opacity: 1;
+    animation: movingBorder 2s linear infinite;
+}
+
+@keyframes movingBorder {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 400% 0;
+    }
+}
+
+@layer utilities {
+    @keyframes blink {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .animate-blink {
+        animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes loading {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(250%);
+        }
+    }
+
+    .animate-loading-bar {
+        animation: loading 0.8s ease infinite;
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.footer-icon {
+    transition: color 0.3s ease;
+}
