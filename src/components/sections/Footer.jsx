@@ -15,7 +15,7 @@ export const Footer = () => {
       <footer className="min-h-[50vh] flex flex-col items-center justify-center bg-transparent backdrop-blur-lg text-gray-100">
         <div className="flex space-x-6 mb-4">
           <motion.a
-            href="https://www.linkedin.com/in/yourusername"
+            href="https://github.com/bronannodev"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-500 hover:text-white transition-colors duration-300"
@@ -28,7 +28,7 @@ export const Footer = () => {
             <FaLinkedin size={30} />
           </motion.a>
           <motion.a
-            href="https://github.com/yourusername"
+            href="https://www.linkedin.com/in/santiago-bonanno-008041288/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-500 hover:text-white transition-colors duration-300"
