@@ -1,0 +1,23 @@
+/* Importación única de Tailwind v4 */
+@import "tailwindcss";
+
+/* Configuración del Tema en v4 (Aquí definimos la fuente) */
+@theme {
+  --font-sans: 'Space Grotesk', sans-serif;
+}
+
+/* Estilos globales básicos */
+:root {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  background-color: #020617; /* bg-slate-950 */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
