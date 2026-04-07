@@ -3,13 +3,20 @@ import { motion } from 'framer-motion'; //eslint-disable-line
 import { Cpu, Code2, Terminal, Briefcase, GraduationCap, BookOpen, Search } from 'lucide-react';
 
 const TIMELINE = [
+    {
+    year: "2026",
+    title: "Desarrollador Freelancer",
+    place: "Disponible",
+    desc: "Brindando servicios de desarrollo de software a medida para clientes.",
+    icon: Briefcase,
+    active: true
+  },
   {
     year: "2025",
     title: "Búsqueda Laboral IT",
     place: "Disponible",
     desc: "Buscando aplicar conocimientos en un entorno profesional.",
     icon: Search,
-    active: true
   },
   {
     year: "2022 - 2025",

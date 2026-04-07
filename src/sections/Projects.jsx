@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion'; //eslint-disable-line
 import { Terminal, Code2, Cpu, ExternalLink } from 'lucide-react';
+import BorderGlow from '../components/BorderGlow';
 
 // --- DATOS LOCALES ---
 const PROJECTS = [
@@ -34,7 +35,7 @@ const PROJECTS = [
     tech: ["Python", "Flask", "HTML", "MySQL"],
     type: "En Desarrollo/Finalizado",
     link: "https://github.com/bronannodev/catalogowebv2",
-    status: "active"
+    status: "finished"
   },
   {
     title: "Sistema de Reservas de turnos",
@@ -42,6 +43,22 @@ const PROJECTS = [
     tech: ["Python", "FastAPI", "React", "MySQL", "TailwindCSS"],
     type: "En Desarrollo/Finalizado",
     link: "https://github.com/bronannodev/appointment-booking-system---health-center",
+    status: "finished"
+  },
+  {
+    title: "Sistema completo de historia clínica",
+    desc: "Plataforma web integral para la gestión de historia clínica médica. Panel para secretarios, administrativos y médicos.",
+    tech: ["Python", "FastAPI", "React", "PostgreSQL", "TailwindCSS", "TypeScript"], 
+    type: "En Desarrollo/Finalizado",
+    link: "#",
+    status: "finished"
+  },
+  {
+    title: "Stock manager",
+    desc: "Plataforma web para la gestión de inventario para emprendimientos del rubro de indumentaria.",
+    tech: ["HTML5", "Javascript", "SUPABASE", "TailwindCSS"], 
+    type: "En Desarrollo/Finalizado",
+    link: "https://github.com/bronannodev/stock-manager",
     status: "finished"
   }
 ];
@@ -122,38 +139,48 @@ const Projects = ({ variants }) => {
         
         <div className="grid md:grid-cols-3 gap-6">
           {PROJECTS.map((project, index) => (
-            <div 
-              key={index} 
-              className="group relative p-6 rounded-xl bg-[#0a0f1c] border border-white/5 hover:border-blue-800/30 hover:bg-[#0f1629] transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
+            <BorderGlow
+              key={index}
+              backgroundColor="#0a0f1c"
+              borderRadius={12}
+              glowColor="210 80 70"
+              glowRadius={36}
+              glowIntensity={0.9}
+              edgeSensitivity={25}
+              coneSpread={20}
+              colors={['#3b82f6', '#6366f1', '#38bdf8']}
+              className="group flex flex-col h-full"
             >
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-2 rounded-sm bg-blue-950/20 text-blue-300 border border-blue-900/20">
-                  {project.type.includes('Web') ? <Code2 className="w-4 h-4" /> : <Cpu className="w-4 h-4" />}
+              <div className="p-6 flex flex-col h-full">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="p-2 rounded-sm bg-blue-950/20 text-blue-300 border border-blue-900/20">
+                    {project.type.includes('Web') ? <Code2 className="w-4 h-4" /> : <Cpu className="w-4 h-4" />}
+                  </div>
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-blue-400 transition-colors">
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
                 </div>
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-blue-400 transition-colors">
-                  <ExternalLink className="w-5 h-5" />
-                </a>
-              </div>
-              
-              {/* BADGE DE ESTADO AQUI */}
-              <ProjectBadge status={project.status} />
 
-              <h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-100 transition-colors">
-                {project.title}
-              </h3>
-              
-              <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow font-light">
-                {project.desc}
-              </p>
-              
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {project.tech.map(t => (
-                  <span key={t} className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-sm bg-[#02040a] text-slate-500 border border-slate-800/50 group-hover:border-blue-900/30 group-hover:text-slate-400 transition-colors">
-                    {t}
-                  </span>
-                ))}
+                {/* BADGE DE ESTADO AQUI */}
+                <ProjectBadge status={project.status} />
+
+                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-100 transition-colors">
+                  {project.title}
+                </h3>
+
+                <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow font-light">
+                  {project.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {project.tech.map(t => (
+                    <span key={t} className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-sm bg-[#02040a] text-slate-500 border border-slate-800/50 group-hover:border-blue-900/30 group-hover:text-slate-400 transition-colors">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            </BorderGlow>
           ))}
         </div>
       </motion.div>
