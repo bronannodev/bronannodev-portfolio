@@ -1,56 +1,110 @@
 import React from 'react';
-import { motion } from 'framer-motion'; //eslint-disable-line
-import { Github, ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import TextType from '../components/TextType';
 
-const Hero = ({ variants }) => {
+const Hero = () => {
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
-    <section id="inicio" className="min-h-[90vh] flex flex-col justify-center pt-10">
-      <motion.div 
-        initial="hidden" 
-        whileInView="visible" 
-        viewport={{ once: true }}
-        variants={variants}
-        className="space-y-8 max-w-3xl"
-      >
-        <div className="flex items-center gap-3">
-          <span className="px-3 py-1 rounded-full bg-green-950/20 text-green-300 text-xs font-medium border border-green-900/30 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(96,165,250,0.5)]"/>
-            Disponible para trabajar
-          </span>
-        </div>
-        
-        <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight">
-          Hola! soy <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-blue-900">
-            Santiago.
-          </span>
+    <section id="inicio" className="space-y-6">
+      {/* Nombre en grande con efecto de tipeo */}
+      <div className="space-y-1">
+        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white font-display">
+          <TextType
+            text={["Santiago Ezequiel Bonanno"]}
+            typingSpeed={75}
+            pauseDuration={1500}
+            showCursor={true}
+            cursorCharacter="|"
+            cursorClassName="text-blue-400 font-normal"
+            loop={false}
+          />
         </h1>
-        
-        <p className="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed font-light">
-          <span className="text-white font-medium">Desarrollador</span>. 
-          web full stack con experiencia en <span className="text-blue-200/80 border-b border-blue-900/50 pb-0.5">React</span>, <span className="text-blue-200/80 border-b border-blue-900/50 pb-0.5">Node.js</span> y <span className="text-blue-200/80 border-b border-blue-900/50 pb-0.5">bases de datos</span>. Me apasiona crear aplicaciones web modernas y eficientes.
-          Puedes conocer más sobre mí y mi experiencia contactandome.
+        <p className="text-sm sm:text-base text-slate-400 font-mono">
+          Full-Stack Developer
         </p>
+      </div>
 
-        <div className="flex flex-wrap gap-4 pt-4">
-          <a 
-            href="#proyectos"
-            className="flex items-center gap-2 px-8 py-4 bg-white text-black rounded-sm font-bold tracking-tight hover:bg-blue-50 transition-all group shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-          >
-            Ver Proyectos
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a 
-            href="https://github.com/bronannodev" 
-            target="_blank" 
+      {/* Texto Principal del Hero */}
+      <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light max-w-3xl">
+        Hola, soy Santiago, podes{' '}
+        <button
+          onClick={handlePrint}
+          type="button"
+          className="text-white underline underline-offset-4 hover:text-blue-400 cursor-pointer font-normal"
+        >
+          descargar mi CV desde aqui
+        </button>{' '}
+        o directamente{' '}
+        <a
+          href="mailto:bonannosantiago@gmail.com"
+          className="text-white underline underline-offset-4 hover:text-blue-400 font-normal"
+        >
+          contactarme
+        </a>{' '}
+        para saber mas de mi y los proyectos en los cuales estuve y estoy involucrado en la actualidad, a continuacion podes ver mis proyectos destacados, tecnologias y formas en las que trabaje.
+      </p>
+
+      {/* Perfil Profesional del CV */}
+      <div className="text-xs text-slate-400 leading-relaxed font-light border-l border-white/[0.12] pl-4 space-y-1">
+        <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block font-medium">
+          Perfil Profesional
+        </span>
+        <p>
+          Full-Stack Developer especializado en React, TypeScript, Python y FastAPI, con experiencia desarrollando aplicaciones web end-to-end para necesidades reales de negocio e instituciones. Experiencia en backend asincrono, APIs REST, PostgreSQL, modelado relacional, autenticacion, migraciones y Docker, desde el relevamiento de requerimientos hasta el despliegue. Experiencia en interfaces interactivas 3D/WebGL mediante Three.js, priorizando soluciones mantenibles y orientadas a problemas operativos concretos.
+        </p>
+      </div>
+
+      {/* Seccion con acceso a redes sociales y demas */}
+      <div className="pt-1 space-y-2 text-xs font-mono no-print">
+        <span className="text-slate-400 uppercase tracking-widest text-[11px] block">
+          Redes y Contacto:
+        </span>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <a
+            href="https://github.com/bronannodev"
+            target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-8 py-4 border border-slate-800 hover:border-blue-800/50 text-slate-400 hover:text-blue-200 rounded-sm font-medium transition-all bg-transparent hover:bg-blue-950/10"
+            className="inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
           >
-            <Github className="w-5 h-5" />
-            GitHub
+            <span>GitHub</span>
+            <ArrowUpRight className="w-3 h-3 text-slate-400" />
           </a>
+
+          <span className="text-slate-700">/</span>
+
+          <a
+            href="https://www.linkedin.com/in/santiago-bonanno-008041288/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
+          >
+            <span>LinkedIn</span>
+            <ArrowUpRight className="w-3 h-3 text-slate-400" />
+          </a>
+
+          <span className="text-slate-700">/</span>
+
+          <a
+            href="mailto:bonannosantiago@gmail.com"
+            className="text-slate-300 hover:text-white transition-colors"
+          >
+            bonannosantiago@gmail.com
+          </a>
+
+          <span className="text-slate-700">/</span>
+
+          <button
+            onClick={handlePrint}
+            type="button"
+            className="text-slate-300 hover:text-white cursor-pointer transition-colors"
+          >
+            Descargar CV (PDF)
+          </button>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

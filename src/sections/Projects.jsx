@@ -1,189 +1,133 @@
 import React from 'react';
-import { motion } from 'framer-motion'; //eslint-disable-line
-import { Terminal, Code2, Cpu, ExternalLink } from 'lucide-react';
-import BorderGlow from '../components/BorderGlow';
+import { ArrowUpRight } from 'lucide-react';
 
-// --- DATOS LOCALES ---
 const PROJECTS = [
   {
-    title: "Sistema de Gestión de Aulas",
-    desc: "Sistema universitario para la reserva y administración de espacios físicos. Optimiza la logística académica.",
-    tech: ["VB.NET", "SQL Server", "WinForms"],
+    title: "Personalizador 3D de Fundas",
+    desc: "Herramienta interactiva en tiempo real para visualizacion y personalizacion 3D de fundas de smartphones con renderizado de modelos, iluminacion y texturas dinamicas.",
+    tech: ["React", "Three.js", "React Three Fiber", "TailwindCSS", "Framer Motion"],
+    type: "3D Web App",
+    link: "https://github.com/bronannodev/ic-personalizador",
+    status: "active",
+    featured: true
+  },
+  {
+    title: "Pilates Studio",
+    desc: "Sistema integral de gestion para estudios de pilates: administracion de alumnas, profesoras, agenda de clases, cupos, control de pagos, caja e inventario.",
+    tech: ["Next.js", "React", "Supabase", "Zustand", "TailwindCSS"],
+    type: "Full Stack Web",
+    link: "https://github.com/pilatesstudiolr1/pilates-carri",
+    status: "active",
+    featured: true
+  },
+  {
+    title: "Sistema Clinico & Historia Medica",
+    desc: "Plataforma para instituto medico quirurgico: gestion de internacion, evolucion clinica diaria y semanal de pacientes y generacion de reportes medicos en PDF.",
+    tech: ["FastAPI", "React", "PostgreSQL", "Docker", "Zustand", "React-PDF"],
+    type: "Full Stack / Salud",
+    link: "https://github.com/bronannodev/front-end-instituto8D",
+    status: "finished",
+    featured: true
+  },
+  {
+    title: "Fundacion RV - Backyard La Picada",
+    desc: "Sitio web oficial de la primera edicion de la ultramaraton backyard 'La Picada', con reglamento, cronograma, galeria multimedia y registro de corredores.",
+    tech: ["Next.js", "TypeScript", "React", "TailwindCSS"],
+    type: "Web Oficial",
+    link: "https://github.com/bronannodev/rvfundacion",
+    liveUrl: "https://rvfundacion.vercel.app",
+    status: "finished",
+    featured: true
+  },
+  {
+    title: "Sistema de Gestion de Aulas",
+    desc: "Software de escritorio para la reserva, control y administracion logistica de espacios fisicos y aulas universitarias segun comisiones y horarios.",
+    tech: ["VB.NET", "WinForms", "MySQL", ".NET"],
     type: "Desktop App",
     link: "https://github.com/bronannodev/Sistema-Gestion-de-Aulas",
-    status: "finished"
+    status: "finished",
+    featured: false
   },
   {
-    title: "Portafolio Profesional",
-    desc: "SPA moderna con diseño responsivo. Estética Midnight Minimalista.",
-    tech: ["React", "Tailwind v4", "Framer Motion"],
-    type: "Web",
-    link: "https://github.com/bronannodev/bronannodev-portfolio",
-    status: "active"
-  },
-  {
-    title: "Gestor de Inventario PYME",
-    desc: "Aplicación de escritorio para control de stock, ventas y reportes en tiempo real. Actualmente en desarrollo activo.",
-    tech: ["C#", ".NET", "PostgreSQL"],
-    type: "En Desarrollo",
-    link: "#",
-    status: "finished"
-  },
-  {
-    title: "Catalogo dinamico e interactivo web",
-    desc: "Catalogo orientado a emprendimientos con la idea de mantener un listado actualizado por parte de los administradores.",
-    tech: ["Python", "Flask", "HTML", "MySQL"],
-    type: "En Desarrollo/Finalizado",
-    link: "https://github.com/bronannodev/catalogowebv2",
-    status: "finished"
-  },
-  {
-    title: "Sistema de Reservas de turnos",
-    desc: "Plataforma web integral para la gestión de turnos médicos. Panel para pacientes y médicos.",
-    tech: ["Python", "FastAPI", "React", "MySQL", "TailwindCSS"],
-    type: "En Desarrollo/Finalizado",
+    title: "Sistema de Reservas de Turnos",
+    desc: "Sistema web de gestion y agendamiento de turnos para centros de salud con paneles independientes para pacientes y profesionales medicos.",
+    tech: ["FastAPI", "React", "MySQL", "TailwindCSS"],
+    type: "Full Stack Web",
     link: "https://github.com/bronannodev/appointment-booking-system---health-center",
-    status: "finished"
+    status: "finished",
+    featured: false
   },
   {
-    title: "Sistema completo de historia clínica",
-    desc: "Plataforma web integral para la gestión de historia clínica médica. Panel para secretarios, administrativos y médicos.",
-    tech: ["Python", "FastAPI", "React", "PostgreSQL", "TailwindCSS", "TypeScript"], 
-    type: "En Desarrollo/Finalizado",
-    link: "#",
-    status: "finished"
-  },
-  {
-    title: "Stock manager",
-    desc: "Plataforma web para la gestión de inventario para emprendimientos del rubro de indumentaria.",
-    tech: ["HTML5", "Javascript", "SUPABASE", "TailwindCSS"], 
-    type: "En Desarrollo/Finalizado",
-    link: "https://github.com/bronannodev/stock-manager",
-    status: "finished"
+    title: "Sabbatex Tienda Textil",
+    desc: "Plataforma de catalogo de productos y venta online para fabricante y distribuidor textil con diseno responsivo y arquitectura modular.",
+    tech: ["React", "TypeScript", "TailwindCSS"],
+    type: "E-commerce Web",
+    link: "https://github.com/bronannodev/sabbatex-tienda",
+    status: "finished",
+    featured: false
   }
 ];
 
-// --- COMPONENTE BADGE DE ESTADO ---
-const ProjectBadge = ({ status }) => {
-  if (!status) return null;
-
-  let config = {
-    wrapper: "bg-slate-800/30 text-slate-400 border-slate-700/50",
-    dot: "bg-slate-400",
-    text: "Estado desconocido"
-  };
-
-  switch (status) {
-    case 'active':
-      config = {
-        wrapper: "bg-green-950/20 text-green-300 border-green-900/30",
-        dot: "bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.5)]",
-        text: "Desarrollo Activo"
-      };
-      break;
-    case 'maintenance':
-      config = {
-        wrapper: "bg-amber-950/20 text-amber-300 border-amber-900/30",
-        dot: "bg-amber-400 animate-pulse",
-        text: "Mantenimiento"
-      };
-      break;
-    case 'delayed':
-      config = {
-        wrapper: "bg-red-950/20 text-red-300 border-red-900/30",
-        dot: "bg-red-500",
-        text: "Demorado"
-      };
-      break;
-    case 'finished':
-      config = {
-        wrapper: "bg-blue-950/20 text-blue-300 border-blue-900/30",
-        dot: "bg-blue-400",
-        text: "Finalizado"
-      };
-      break;
-    default:
-      break;
-  }
-
+const Projects = () => {
   return (
-    <div className="flex items-center mb-4">
-      <span className={`px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-medium border flex items-center gap-2 ${config.wrapper}`}>
-        <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
-        {config.text}
-      </span>
-    </div>
-  );
-};
+    <section id="proyectos" className="space-y-6">
+      <div>
+        <h2 className="text-xs font-mono uppercase tracking-widest text-slate-400">
+          Proyectos
+        </h2>
+      </div>
 
-// --- COMPONENTES INTERNOS ---
-const SectionTitle = ({ title, icon: Icon }) => ( //eslint-disable-line
-  <div className="flex items-center gap-3 mb-10 group">
-    <div className="p-2 rounded-md bg-blue-950/30 border border-blue-900/30 text-blue-200 group-hover:bg-blue-900/20 transition-colors">
-      <Icon className="w-5 h-5" />
-    </div>
-    <h2 className="text-3xl font-bold text-white tracking-tight group-hover:text-blue-100 transition-colors">{title}</h2>
-  </div>
-);
-
-const Projects = ({ variants }) => {
-  return (
-    <section id="proyectos" className="py-24">
-      <motion.div 
-        initial="hidden" 
-        whileInView="visible" 
-        viewport={{ once: true }}
-        variants={variants}
-      >
-        <SectionTitle title="Proyectos Selectos" icon={Terminal} />
-        
-        <div className="grid md:grid-cols-3 gap-6">
-          {PROJECTS.map((project, index) => (
-            <BorderGlow
-              key={index}
-              backgroundColor="#0a0f1c"
-              borderRadius={12}
-              glowColor="210 80 70"
-              glowRadius={36}
-              glowIntensity={0.9}
-              edgeSensitivity={25}
-              coneSpread={20}
-              colors={['#3b82f6', '#6366f1', '#38bdf8']}
-              className="group flex flex-col h-full"
-            >
-              <div className="p-6 flex flex-col h-full">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="p-2 rounded-sm bg-blue-950/20 text-blue-300 border border-blue-900/20">
-                    {project.type.includes('Web') ? <Code2 className="w-4 h-4" /> : <Cpu className="w-4 h-4" />}
-                  </div>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-blue-400 transition-colors">
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                </div>
-
-                {/* BADGE DE ESTADO AQUI */}
-                <ProjectBadge status={project.status} />
-
-                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-100 transition-colors">
+      {/* Lista Editorial de Proyectos (Sin Cards, sin Boxes, sin Filtros) */}
+      <div className="divide-y divide-white/[0.06]">
+        {PROJECTS.map((project, idx) => (
+          <article
+            key={idx}
+            className="py-5 first:pt-0 last:pb-0 space-y-2 group"
+          >
+            {/* Linea 1: Titulo, Estado y Enlaces */}
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <div className="flex items-baseline gap-2.5">
+                <span
+                  className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                    project.status === 'active' ? 'bg-emerald-400' : 'bg-slate-400'
+                  }`}
+                  title={project.status === 'active' ? 'Desarrollo Activo' : 'Finalizado'}
+                />
+                <h3 className="text-sm font-semibold text-white group-hover:text-blue-200 transition-colors">
                   {project.title}
                 </h3>
-
-                <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow font-light">
-                  {project.desc}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.tech.map(t => (
-                    <span key={t} className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-sm bg-[#02040a] text-slate-500 border border-slate-800/50 group-hover:border-blue-900/30 group-hover:text-slate-400 transition-colors">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+                <span className="text-[11px] font-mono text-slate-400">
+                  &bull; {project.type}
+                </span>
               </div>
-            </BorderGlow>
-          ))}
-        </div>
-      </motion.div>
+
+              {project.liveUrl && (
+                <div className="flex items-center gap-4 text-xs font-mono shrink-0 pl-4 sm:pl-0">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-0.5 text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    <span>Demo</span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
+                </div>
+              )}
+            </div>
+
+            {/* Linea 2: Descripcion */}
+            <p className="text-xs text-slate-400 font-light leading-relaxed max-w-3xl pl-4">
+              {project.desc}
+            </p>
+
+            {/* Linea 3: Tecnologias en linea */}
+            <p className="text-[11px] font-mono text-slate-400 pl-4">
+              {project.tech.join(' · ')}
+            </p>
+          </article>
+        ))}
+      </div>
     </section>
   );
 };
